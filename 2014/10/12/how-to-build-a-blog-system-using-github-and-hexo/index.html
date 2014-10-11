@@ -4,12 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | 刷机熊也很忙</title>
+    <title>how to build a blog system using github and hexo | 刷机熊也很忙</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Weifeng Xiong">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" content="利用GitHub Pages 和 Hexo 搭建博客学习笔记
+无意中在知乎上看到了这样一个话题：如何在 GitHub 上写博客？ 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记
+GitHub Pages
+给我的感觉就是，给我一个index.html，我能给你变出一个世界，其实不管什么语言">
     
     
     
@@ -74,15 +77,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/09/19/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/" title="how to build a blog system using github and hexo" itemprop="url">how to build a blog system using github and hexo</a>
   </h1>
   <p class="article-author">By
     
       <a href="https://plus.google.com/112898171288857870000?rel=author" title="Weifeng Xiong" target="_blank" itemprop="author">Weifeng Xiong</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-09-19T15:28:16.000Z" itemprop="datePublished">9月 19 2014</time>
-    更新日期:<time datetime="2014-09-19T15:28:16.000Z" itemprop="dateModified">9月 19 2014</time>
+    <time datetime="2014-10-11T16:51:20.000Z" itemprop="datePublished">10月 12 2014</time>
+    更新日期:<time datetime="2014-10-11T16:59:13.000Z" itemprop="dateModified">10月 12 2014</time>
     
   </p>
 </header>
@@ -91,37 +94,34 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#利用GitHub_Pages_和_Hexo_搭建博客学习笔记"><span class="toc-number">1.</span> <span class="toc-text">利用GitHub Pages 和 Hexo 搭建博客学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub_Pages"><span class="toc-number">1.1.</span> <span class="toc-text">GitHub Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git"><span class="toc-number">1.2.</span> <span class="toc-text">Git</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2>
-<h3 id="Create_a_new_post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<h1 id="利用GitHub_Pages_和_Hexo_搭建博客学习笔记">利用GitHub Pages 和 Hexo 搭建博客学习笔记</h1>
+<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记</p>
+<h2 id="GitHub_Pages">GitHub Pages</h2>
+<p>给我的感觉就是，给我一个index.html，我能给你变出一个世界，其实不管什么语言什么架构搭建的项目，只要把index.html 放上去，并且本地能正常运行，那么github pages就能显示出你想要的网页来，一般github pages 的地址是<code>yourname.github.io</code>,<em>yourname</em>是你的github用户名，貌似一个github账号对应一个github pages，如果需要从自己的域名进入，那么只需要在项目的根目录下加一个CNAME文件即可，如果是Mac下面或者Linux的环境，一行命令搞定：</p>
+<p><code>vim CNAME</code> 或者<code>touch CNAME</code></p>
+<p>记得用vim的时候记得:wq 保存退出</p>
+<pre><code><span class="keyword">p</span><span class="variable">s:</span>由于缓存的原因，第一次上传github pages 项目的时候需要等待十分钟左右，才能在yourname.github.io上看到
+</code></pre><h2 id="Git">Git</h2>
+<p>说到GitHub，顾名思义，git是一个分布式的版本控制系统，这里不详细描述，hub在geek的心里就是集线器的意思吧，所以要在github上写博客，首先要学会用git，git不需要很深入的学习，但基本的命令还是要掌握的，这里推荐一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743858312764dca7ad6d0754f76aa562e3789478044000" target="_blank" rel="external">廖雪峰的Git教程</a></p>
+<p>未完待续。。。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hexo/">Hexo</a>►<a class="article-category-link" href="/categories/Hexo/Git/">Git</a>
+</div>
+
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wfxiong1990.github.io/2014/09/19/hello-world/" data-title="Hello World | 刷机熊也很忙" data-tsina="1737020081" class="share clearfix">
+  <div data-url="http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/" data-title="how to build a blog system using github and hexo | 刷机熊也很忙" data-tsina="1737020081" class="share clearfix">
   </div>
 
 </div>
@@ -130,14 +130,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/" title="how to build a blog system using github and hexo">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  how to build a blog system using github and hexo</span>
+
+<div class="next">
+<a href="/2014/09/19/hello-world/"  title="Hello World">
+ <strong>NEXT:</strong><br/> 
+ <span>Hello World
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -151,7 +151,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#利用GitHub_Pages_和_Hexo_搭建博客学习笔记"><span class="toc-number">1.</span> <span class="toc-text">利用GitHub Pages 和 Hexo 搭建博客学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub_Pages"><span class="toc-number">1.1.</span> <span class="toc-text">GitHub Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git"><span class="toc-number">1.2.</span> <span class="toc-text">Git</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
