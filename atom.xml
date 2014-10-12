@@ -1,53 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[刷机熊也很忙]]></title>
-  
+  <subtitle><![CDATA[Coding The World]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-10-11T16:59:35.319Z</updated>
+  <updated>2014-10-12T13:23:31.597Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
     <name><![CDATA[Weifeng Xiong]]></name>
-    <email><![CDATA[wfxiong1990@gmail.com]]></email>
+    <email><![CDATA[wfxiong1990@gmailcom]]></email>
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[how to build a blog system using github and hexo]]></title>
-    <link href="http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/"/>
-    <id>http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/</id>
-    <published>2014-10-11T16:51:20.000Z</published>
-    <updated>2014-10-11T16:59:13.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="利用GitHub_Pages_和_Hexo_搭建博客学习笔记">利用GitHub Pages 和 Hexo 搭建博客学习笔记</h1>
-<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记</p>
-<h2 id="GitHub_Pages">GitHub Pages</h2>
-<p>给我的感觉就是，给我一个index.html，我能给你变出一个世界，其实不管什么语言什么架构搭建的项目，只要把index.html 放上去，并且本地能正常运行，那么github pages就能显示出你想要的网页来，一般github pages 的地址是<code>yourname.github.io</code>,<em>yourname</em>是你的github用户名，貌似一个github账号对应一个github pages，如果需要从自己的域名进入，那么只需要在项目的根目录下加一个CNAME文件即可，如果是Mac下面或者Linux的环境，一行命令搞定：</p>
-<p><code>vim CNAME</code> 或者<code>touch CNAME</code></p>
-<p>记得用vim的时候记得:wq 保存退出</p>
-<pre><code><span class="keyword">p</span><span class="variable">s:</span>由于缓存的原因，第一次上传github pages 项目的时候需要等待十分钟左右，才能在yourname.github.io上看到
-</code></pre><h2 id="Git">Git</h2>
-<p>说到GitHub，顾名思义，git是一个分布式的版本控制系统，这里不详细描述，hub在geek的心里就是集线器的意思吧，所以要在github上写博客，首先要学会用git，git不需要很深入的学习，但基本的命令还是要掌握的，这里推荐一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743858312764dca7ad6d0754f76aa562e3789478044000" target="_blank" rel="external">廖雪峰的Git教程</a></p>
-<p>未完待续。。。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="利用GitHub_Pages_和_Hexo_搭建博客学习笔记">利用GitHub Pages 和 Hexo 搭建博客学习笔记</h1>
-<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962]]>
-    </summary>
-    
-      <category term="Hexo" scheme="http://wfxiong1990.github.io/categories/Hexo/"/>
-    
-      <category term="Git" scheme="http://wfxiong1990.github.io/categories/Hexo/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[Hello World]]></title>
-    <link href="http://wfxiong1990.github.io/2014/09/19/hello-world/"/>
-    <id>http://wfxiong1990.github.io/2014/09/19/hello-world/</id>
-    <published>2014-09-19T15:28:16.000Z</published>
-    <updated>2014-09-19T15:28:16.000Z</updated>
+    <link href="http://wfxiong1990.github.io/2014/10/12/hello-world/"/>
+    <id>http://wfxiong1990.github.io/2014/10/12/hello-world/</id>
+    <published>2014-10-11T17:09:31.000Z</published>
+    <updated>2014-10-11T17:09:31.000Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick_Start">Quick Start</h2>
 <h3 id="Create_a_new_post">Create a new post</h3>
@@ -70,6 +42,32 @@
     <summary type="html">
     <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
     </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[利用GitHub Pages 和 Hexo 搭建博客学习笔记]]></title>
+    <link href="http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/"/>
+    <id>http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/</id>
+    <published>2014-10-11T16:51:20.000Z</published>
+    <updated>2014-10-12T08:36:47.000Z</updated>
+    <content type="html"><![CDATA[<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记</p>
+<h2 id="GitHub_Pages">GitHub Pages</h2>
+<p>给我的感觉就是，给我一个index.html，我能给你变出一个世界，其实不管什么语言什么架构搭建的项目，只要把index.html 放上去，并且本地能正常运行，那么github pages就能显示出你想要的网页来，一般github pages 的地址是<code>yourname.github.io</code>,<em>yourname</em>是你的github用户名，貌似一个github账号对应一个github pages，如果需要从自己的域名进入，那么只需要在项目的根目录下加一个CNAME文件即可，如果是Mac下面或者Linux的环境，一行命令搞定：</p>
+<p><code>vim CNAME</code> 或者<code>touch CNAME</code></p>
+<p>记得用vim的时候记得:wq 保存退出</p>
+<pre><code><span class="keyword">p</span><span class="variable">s:</span>由于缓存的原因，第一次上传github pages 项目的时候需要等待十分钟左右，才能在yourname.github.io上看到
+</code></pre><h2 id="Git">Git</h2>
+<p>说到GitHub，顾名思义，git是一个分布式的版本控制系统，这里不详细描述，hub在geek的心里就是集线器的意思吧，所以要在github上写博客，首先要学会用git，git不需要很深入的学习，但基本的命令还是要掌握的，这里推荐一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743858312764dca7ad6d0754f76aa562e3789478044000" target="_blank" rel="external">廖雪峰的Git教程</a></p>
+<p>未完待续。。。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建]]>
+    </summary>
+    
+      <category term="Hexo" scheme="http://wfxiong1990.github.io/tags/Hexo/"/>
+    
+      <category term="Git" scheme="http://wfxiong1990.github.io/tags/Git/"/>
     
   </entry>
   
