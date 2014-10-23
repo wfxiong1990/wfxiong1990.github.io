@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[刷机熊也很忙]]></title>
-  <subtitle><![CDATA[Coding The World]]></subtitle>
+  <title><![CDATA[Weifeng's Blog]]></title>
+  <subtitle><![CDATA[刷机熊也很忙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-10-17T15:01:01.886Z</updated>
+  <updated>2014-10-23T16:10:50.157Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
     <name><![CDATA[Weifeng Xiong]]></name>
-    <email><![CDATA[wfxiong1990@gmailcom]]></email>
+    <email><![CDATA[wfxiong1990@gmail.com]]></email>
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
