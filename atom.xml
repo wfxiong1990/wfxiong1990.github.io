@@ -4,7 +4,7 @@
   <subtitle><![CDATA[刷机熊也很忙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-10-23T16:10:50.157Z</updated>
+  <updated>2014-10-24T15:41:40.014Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
@@ -50,7 +50,7 @@
     <link href="http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/"/>
     <id>http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/</id>
     <published>2014-10-11T16:51:20.000Z</published>
-    <updated>2014-10-15T14:30:38.000Z</updated>
+    <updated>2014-10-24T15:41:22.000Z</updated>
     <content type="html"><![CDATA[<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记</p>
 <hr>
 <h2 id="GitHub_Pages">GitHub Pages</h2>
@@ -93,7 +93,7 @@
 <p>Markdown的学习可以参考作业部落的<a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">CMD Markdown</a>在线的Markdown编辑器，很快就能上手的。</p>
 <hr>
 <h2 id="域名申请和绑定">域名申请和绑定</h2>
-<p>很幸运，我通过github的student package 拿到了namecheap的一年 顶级域名 <code>xwf.me</code>的使用权，<a href="http://www.yd631.com/namecheap-free-me/" target="_blank" rel="external">申请方法</a>。拿到后把该域名的URL Forwarding 改成如下即可：<br><img src="http://davidensinger.com/assets/img/posts/2014-01-07-namecheap-dns-settings.png" alt="image"></p>
+<p>很幸运，我通过github的student package 拿到了namecheap的一年 顶级域名 <code>xwf.me</code>的使用权，<a href="http://www.yd631.com/namecheap-free-me/" target="_blank" rel="external">申请方法</a>。拿到后把该域名的URL Forwarding 改成如下即可：<br><img src="http://ww4.sinaimg.cn/mw690/6788d2b1gw1elm37g1b7gj20ju07zdgr.jpg" alt="image"></p>
 <p>具体教程<a href="http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap/" target="_blank" rel="external">戳这里</a>。</p>
 <h2 id="小结">小结</h2>
 <p>自己搭建博客还是很拼的，各种google，百度还是算了，推荐一个网站：<a href="http://tmd123.com" target="_blank" rel="external">通天塔</a>，把google镜像到AWS亚马逊云上面，速度上还是靠谱的，<del>隐私问题，反正应该比百度靠谱吧，我也不知道</del>。<br>能有独立域名，网站还很干净，没广告，markdown熟练后也很方便，写博客也能慢慢改进自己描述问题不清楚，无法正确表达观点的问题。理科生，怀才不遇的大都连自己会啥都说不清楚。</p>
