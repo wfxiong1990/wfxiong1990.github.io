@@ -4,7 +4,7 @@
   <subtitle><![CDATA[刷机熊也很忙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-10-24T16:41:29.332Z</updated>
+  <updated>2014-10-28T15:02:02.999Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
@@ -15,11 +15,55 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[用python实现图灵机器人的接口]]></title>
+    <title><![CDATA[用python来拷贝文件到指定文件夹并启动对应程序]]></title>
+    <link href="http://wfxiong1990.github.io/2014/10/25/copying-files-and-run-command-to-start-exe-via-python/"/>
+    <id>http://wfxiong1990.github.io/2014/10/25/copying-files-and-run-command-to-start-exe-via-python/</id>
+    <published>2014-10-25T04:15:16.000Z</published>
+    <updated>2014-10-25T04:34:58.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="码代码目的">码代码目的</h2>
+<p>因为工作需要，经常要把自己项目下的dll从debug版本拷贝到publish版本，然后启动publish版本下面的exe程序，由于重复劳动多次后，决定来造福自己一下。</p>
+<h2 id="开始码代码">开始码代码</h2>
+<p>两个技术点，一是用python来复制文件并且覆盖原文件，二是从cmd来启动应用程序。</p>
+<h3 id="python复制文件">python复制文件</h3>
+<p>有两种方法，一种是用自带的open和write方法来实现文件的打开和写入，上代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open(targetFile, <span class="string">"wb"</span>).write(open(sourceFile, <span class="string">"rb"</span>).read())</div></pre></td></tr></table></figure>
+
+<p>其中wb和rb分别对应的写二进制文件和读二进制文件。所以代码的意思就是，把sourcefile用二进制的方式都进来，然后再写到targetfile文件中去。</p>
+<p>经过测试，我发现把targetfile的属性改成只读的，读写文件的方法也能够把文件从源文件夹复制到目的文件夹，而且复制完以后只读属性还在的。</p>
+<p>还有一种就是调用shutil.py模块里面的copyfile的方法，简单暴力。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> shutil</div><div class="line"></div><div class="line">shutil.copyfile(sourcefile,targetfile)</div><div class="line">shutil.copy2(sourcefile,targetfile)  <span class="comment">#原文件的所有属性状态全部复制</span></div></pre></td></tr></table></figure>
+
+<p>shutil里面有很多copy的方法，各自有细微的区别，具体参考<a href="http://www.cnblogs.com/CLTANG/archive/2011/11/15/2249257.html" target="_blank" rel="external">http://www.cnblogs.com/CLTANG/archive/2011/11/15/2249257.html</a>。需要注意的是，sourcefile和targetfile必须是<strong>文件</strong>的绝对路径，而不是文件名的绝对路径，否则程序会报错。</p>
+<h3 id="从命令行启动程序">从命令行启动程序</h3>
+<p>首先，看看你的程序是否可以从cmd启动，也是是<code>Win+R</code>打开cmd后输入程序的绝对路径，例如<code>E:\Program Files (x86)\Tencent\QQ\Bin\QQ.exe</code>回车，如果能跳出程序的话，好办了~<br>用subprocess的check_call方法直接调用就可以了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">subprocess.check_call([<span class="string">u"E:\\Program Files (x86)\\Tencent\\QQ\\Bin\\QQ.exe"</span>])</div></pre></td></tr></table></figure>
+
+<p>后面还可以跟好多参数，具体见这里<a href="https://docs.python.org/2.7/library/subprocess.html#subprocess.check_call" target="_blank" rel="external">https://docs.python.org/2.7/library/subprocess.html#subprocess.check_call</a><br>官方的说明如下：</p>
+<blockquote>
+<p>Run command with arguments. Wait for command to complete. If the return code was zero then return, otherwise raise CalledProcessError. </p>
+</blockquote>
+<p>好了，大功告成，现在贴一下做所有的代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=UTF-8</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">copyFiles</span><span class="params">(sourceDir, targetDir)</span>:</span>  <span class="comment"># 把某一文件夹下的指定文件复制到目标文件夹中    </span></div><div class="line">    fileList = [<span class="string">'1.dll'</span>, <span class="string">'2.dll'</span>, <span class="string">'3.dll'</span>, <span class="string">'4.dll'</span>, <span class="string">'5.dll'</span>, <span class="string">'6.dll'</span>,</div><div class="line">                <span class="string">'7.dll'</span>, <span class="string">'8.dll'</span>]</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> fileList:</div><div class="line">        sourceFile = os.path.join(sourceDir, item)</div><div class="line">        targetFile = os.path.join(targetDir, item)</div><div class="line">        <span class="keyword">if</span> os.path.isfile(sourceFile):</div><div class="line">            <span class="keyword">try</span>:                </div><div class="line">                open(targetFile, <span class="string">"wb"</span>).write(open(sourceFile, <span class="string">"rb"</span>).read())</div><div class="line">                <span class="keyword">print</span> (<span class="string">"'copy file "</span>,item,<span class="string">" successfully!'"</span>)</div><div class="line">            <span class="keyword">except</span> StandardError, e:</div><div class="line">                <span class="keyword">print</span> e.message</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:  <span class="comment"># 主函数</span></div><div class="line">    sourceDir = <span class="string">'D:\\my_program\\Debug\\bin'</span></div><div class="line">    targetStr=raw_input(<span class="string">'Press r to copy to release or others to copy to publish\n'</span>)</div><div class="line">    <span class="comment"># targetDir</span></div><div class="line">    <span class="keyword">if</span>(targetStr.lower()==<span class="string">'r'</span>):</div><div class="line">        targetDir = <span class="string">'D:\\my_program\\Release\\bin'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        targetDir=<span class="string">'D:\\my_program\\Publish\\bin'</span></div><div class="line">    copyFiles(sourceDir, targetDir)</div><div class="line">    subprocess.check_call([<span class="string">u"D:\\my_program\\target.exe"</span>])//通过命令行启动target.exe</div><div class="line">    raw_input(<span class="string">'Press any key to exit!'</span>)</div></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<p>如果没有这个程序，那么之前我需要打开sourceDir文件夹，在200多个文件中找到需要的dll，然后再打开targetDir,复制过去，会弹框说该目录下已存在此文件，把 <em>为之后7个冲突执行此操作</em> 打上勾，点复制和替换，找到target.exe，双击启动。现在呢，双击这个copydll.py文件，然后dll复制好了，程序也起来了，it works！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="码代码目的">码代码目的</h2>
+<p>因为工作需要，经常要把自己项目下的dll从debug版本拷贝到publish版本，然后启动publish版本下面的exe程序，由于重复劳动多次后，决定来造福自己一下。</p>
+<h2 id="开始码代码">开始码代码</h]]>
+    </summary>
+    
+      <category term="python" scheme="http://wfxiong1990.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[用python实现图灵聊天机器人的接口]]></title>
     <link href="http://wfxiong1990.github.io/2014/10/25/using-python-to-call-tuling123-api/"/>
     <id>http://wfxiong1990.github.io/2014/10/25/using-python-to-call-tuling123-api/</id>
     <published>2014-10-24T16:13:03.000Z</published>
-    <updated>2014-10-24T16:39:44.000Z</updated>
+    <updated>2014-10-28T15:00:59.000Z</updated>
     <content type="html"><![CDATA[<h2 id="码这坨代码目的">码这坨代码目的</h2>
 <p>在知乎上看到，<a href="http://www.zhihu.com/question/20492916" target="_blank" rel="external">微信公众平台的聊天机器人是怎么搭建？</a>的主题,对图灵机器人感兴趣起来，官方有php和java的实现，那么，python的简单实现，就我了。</p>
 <h2 id="开始码代码啦">开始码代码啦</h2>
@@ -85,30 +129,28 @@
   </entry>
   
   <entry>
-    <title><![CDATA[利用GitHub Pages 和 Hexo 搭建静态博客学习笔记]]></title>
+    <title><![CDATA[利用GitHub Pages 和 Hexo 搭建静态博客]]></title>
     <link href="http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/"/>
     <id>http://wfxiong1990.github.io/2014/10/12/how-to-build-a-blog-system-using-github-and-hexo/</id>
     <published>2014-10-11T16:51:20.000Z</published>
-    <updated>2014-10-24T15:41:22.000Z</updated>
-    <content type="html"><![CDATA[<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记</p>
-<hr>
+    <updated>2014-10-28T14:57:14.000Z</updated>
+    <content type="html"><![CDATA[<p>无意中在知乎上看到了这样一个话题：<a href="http://www.zhihu.com/question/20962496" target="_blank" rel="external">如何在 GitHub 上写博客？</a> 于是开始自己捣腾，现在分享一下自己搭建博客的一点心得和笔记。</p>
 <h2 id="GitHub_Pages">GitHub Pages</h2>
-<p>给我的感觉就是，给我一个index.html，我能给你变出一个世界，其实不管什么语言什么架构搭建的项目，只要把index.html 放上去，并且本地能正常运行，这就是<strong>静态网页程序</strong>。那么github pages就能显示出你想要的网页来，一般github pages 的地址是<code>yourname.github.io</code>,<em>yourname</em>是你的github用户名，貌似一个github账号对应一个github pages，如果需要从自己的域名进入，那么只需要在项目的根目录下加一个CNAME文件即可，如果是Mac下面或者Linux的环境，一行命令搞定：</p>
+<p>给我的感觉就是，给我一个index.html，我能给你变出一个世界，其实不管什么语言什么架构搭建的项目，只要把index.html 放上去，并且本地能正常运行，这就是<strong>静态网页程序</strong>。那么github pages就能显示出你想要的网页来，一般github pages 的地址是<code>yourname.github.io</code>,<em>yourname</em>是你的github用户名，貌似一个github账号对应一个github pages，如果需要从自己的域名进入，那么只需要在项目的source目录下加一个CNAME文件即可，如果是Mac下面或者Linux的环境，一行命令搞定：</p>
 <p><code>vim CNAME</code> 或者<code>touch CNAME</code></p>
-<p>记得用vim的时候记得:wq 保存退出</p>
+<p>记得用vim的时候记得:wq 保存退出。</p>
 <blockquote>
-<p>ps:由于缓存的原因，第一次上传github pages 项目的时候需要等待十分钟左右，才能在yourname.github.io上看到</p>
+<p>ps:由于缓存的原因，第一次上传github pages 项目的时候需要等待几分钟左右，才能在yourname.github.io上看到。</p>
 </blockquote>
-<hr>
 <h2 id="Git">Git</h2>
-<p>说到GitHub，顾名思义，git是一个分布式的版本控制系统，这里不详细描述，hub在geek的心里就是集线器的意思吧，所以要在github上写博客，首先要学会用git，git不需要很深入的学习，但基本的命令还是要掌握的，这里推荐一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743858312764dca7ad6d0754f76aa562e3789478044000" target="_blank" rel="external">廖雪峰的Git教程</a></p>
+<p>说到GitHub，顾名思义，git是一个分布式的版本控制系统，这里不详细描述，hub在geek的心里就是集线器的意思吧，所以要在github上写博客，首先要学会用git，git不需要很深入的学习，但基本的命令还是要掌握的，这里推荐一下<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743858312764dca7ad6d0754f76aa562e3789478044000" target="_blank" rel="external">廖雪峰的Git教程</a>。</p>
+<p>首先你的电脑上要有git环境，如果输入<code>git --version</code>或者<code>whois git</code>如下图所示<img src="http://ww3.sinaimg.cn/mw690/6788d2b1jw1elr9bsup7zj20jf0fpwg2.jpg" alt="git in terminal">，那就是ok的，否则，需要在<a href="http://git-scm.com/downloads" target="_blank" rel="external">这里</a>下载对应系统的git安装包。</p>
 <p>Git的基础操作很简单，无非是<code>git init</code> ,<code>git add</code>,<code>git commit</code>,<code>git status</code>,<code>git push</code>和<code>git pull</code>，对应的操作是当前文件夹初始化、把文件纳入版本管理，提交更改，检查状态，push status的变化到远程repository，把远程repository的更新拉下来，但是git 最牛的地方在对分支的管理，这方便我还掌握不够，大家可以参考上文中提到的廖雪峰的Git教程。</p>
-<hr>
 <h2 id="Hexo">Hexo</h2>
 <p><a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>是一个基于Node.js的静态博客程序，可以方便的生成静态网页托管在github和Heroku上。顾名思义，它是基于Node.js的，所以先要有Node.js的环境，<a href="http://www.infoq.com/cn/articles/nodejs-npm-install-config" target="_blank" rel="external">安装教程在此</a>。由于本人的macbook上安装了<a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="external">Homebrew</a>，所以安装node只需要以下命令：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>brew update</div><div class="line"><span class="variable">$ </span>brew install node</div></pre></td></tr></table></figure>
 
-<p>不得不赞，macbook真的是开发者最好的玩具，比逼格更有生产力啊。</p>
+<p>不得不赞，macbook真的是开发者最好的玩具，比逼格更有生产力啊。<br>如果是windows，如果在cmd命令行里面输入<code>npm --version</code>没有显示，那么去<a href="http://nodejs.org/download/" target="_blank" rel="external">这里</a>下载nodejs的安装包，安装之。</p>
 <p>Hexo虽然基于Node.js但是我们不需要了解Node.js编程，需要的只是4条命令：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g  <span class="comment">##生成静态博客的public文件夹，也就是要上传到GitHub Pages的那部分文件</span></div><div class="line"><span class="variable">$ </span>hexo s  <span class="comment">##运行本地的博客程序，比如你设置的端口号是4000的话，浏览器打开localhost:4000 就可以看到你搭建的博客是什么样子的了</span></div><div class="line"><span class="variable">$ </span>hexo d  <span class="comment">##上传本地的修改到远程仓库 前提是你在_config.yml里面设置了git仓库的路径和分支</span></div><div class="line"><span class="variable">$ </span>hexo n  <span class="comment">##新建一篇博客，就是new一个*.md的markdown文件，如果是在Mac下面可以直接用Mou程序打开</span></div></pre></td></tr></table></figure>
 
@@ -117,13 +159,11 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span><span class="symbol">logger:</span> <span class="keyword">false</span></div><div class="line"><span class="variable">$ </span><span class="symbol">logger_format:</span> dev</div></pre></td></tr></table></figure>
 
 <p>记住至少要在冒号后有一个空格，博客才能正确运行。</p>
-<hr>
 <h2 id="Hexo主题优化">Hexo主题优化</h2>
 <p>本博客采用了<a href="https://github.com/A-limon/pacman" target="_blank" rel="external">Pacman的主题</a>。<a href="http://yangjian.me/pacman/hello/introducing-pacman-theme/" target="_blank" rel="external">介绍在此</a>，不得不说，这个主题很漂亮，给人眼前一亮的感觉。用这个主题只要把github上的资源通过<code>git clone</code>到<code>本地的hexo目录\themes</code>下面，改一下hexo的_config.yml：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">theme</span>: <span class="string">pacman</span></div></pre></td></tr></table></figure>
 
-<p>就可以了</p>
-<hr>
+<p>就可以了。</p>
 <h2 id="Markdown">Markdown</h2>
 <p>Markdown简直是程序猿的word编辑器，wikipedia里面介绍如下：</p>
 <blockquote>
