@@ -4,17 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>用python来拷贝文件到指定文件夹并启动对应程序 | Weifeng&#39;s Blog</title>
+    <title>【LeetCode算法训练】 判断字符串是否是回文 | Weifeng&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Weifeng Xiong">
     
-    <meta name="description" content="码代码目的
-因为工作需要，经常要把自己项目下的dll从debug版本拷贝到publish版本，然后启动publish版本下面的exe程序，由于重复劳动多次后，决定来造福自己一下。
-开始码代码
-两个技术点，一是用python来复制文件并且覆盖原文件，二是从cmd来启动应用程序。
-python复制文件
-">
+    <meta name="description" content="什么是LeetCode
+LeetCode 已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。
+LeetCode上面有很多算法可以作为平时的脑力训练，适当做一做也可以提升程序猿打怪的经验值。
+鄙人今年已经是第二个本命年了，有一种墙裂的不">
     
     
     
@@ -75,14 +73,14 @@ python复制文件
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/10/25/copying-files-and-run-command-to-start-exe-via-python/" title="用python来拷贝文件到指定文件夹并启动对应程序" itemprop="url">用python来拷贝文件到指定文件夹并启动对应程序</a>
+      <a href="/2014/11/04/Valid-Palindrome/" title="【LeetCode算法训练】 判断字符串是否是回文" itemprop="url">【LeetCode算法训练】 判断字符串是否是回文</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/112898171288857862916?rel=author" title="Weifeng Xiong" target="_blank" itemprop="author">Weifeng Xiong</a>
 		
   <p class="article-time">
-    <time datetime="2014-10-25T04:15:16.000Z" itemprop="datePublished"> 发表于 10月 25 2014</time>
+    <time datetime="2014-11-04T14:45:29.000Z" itemprop="datePublished"> 发表于 11月 4 2014</time>
     
   </p>
 </header>
@@ -92,37 +90,30 @@ python复制文件
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#码代码目的"><span class="toc-number">1.</span> <span class="toc-text">码代码目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始码代码"><span class="toc-number">2.</span> <span class="toc-text">开始码代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python复制文件"><span class="toc-number">2.1.</span> <span class="toc-text">python复制文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从命令行启动程序"><span class="toc-number">2.2.</span> <span class="toc-text">从命令行启动程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是LeetCode"><span class="toc-number">1.</span> <span class="toc-text">什么是LeetCode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目解析"><span class="toc-number">2.</span> <span class="toc-text">题目解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#难度★☆☆☆☆"><span class="toc-number">3.</span> <span class="toc-text">难度★☆☆☆☆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="码代码目的">码代码目的</h2>
-<p>因为工作需要，经常要把自己项目下的dll从debug版本拷贝到publish版本，然后启动publish版本下面的exe程序，由于重复劳动多次后，决定来造福自己一下。</p>
-<h2 id="开始码代码">开始码代码</h2>
-<p>两个技术点，一是用python来复制文件并且覆盖原文件，二是从cmd来启动应用程序。</p>
-<h3 id="python复制文件">python复制文件</h3>
-<p>有两种方法，一种是用自带的open和write方法来实现文件的打开和写入，上代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open(targetFile, <span class="string">"wb"</span>).write(open(sourceFile, <span class="string">"rb"</span>).read())</div></pre></td></tr></table></figure>
-
-<p>其中wb和rb分别对应的写二进制文件和读二进制文件。所以代码的意思就是，把sourcefile用二进制的方式都进来，然后再写到targetfile文件中去。</p>
-<p>经过测试，我发现把targetfile的属性改成只读的，读写文件的方法也能够把文件从源文件夹复制到目的文件夹，而且复制完以后只读属性还在的。</p>
-<p>还有一种就是调用shutil.py模块里面的copyfile的方法，简单暴力。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> shutil</div><div class="line"></div><div class="line">shutil.copyfile(sourcefile,targetfile)</div><div class="line">shutil.copy2(sourcefile,targetfile)  <span class="comment">#原文件的所有属性状态全部复制</span></div></pre></td></tr></table></figure>
-
-<p>shutil里面有很多copy的方法，各自有细微的区别，具体参考<a href="http://www.cnblogs.com/CLTANG/archive/2011/11/15/2249257.html" target="_blank" rel="external">http://www.cnblogs.com/CLTANG/archive/2011/11/15/2249257.html</a>。需要注意的是，sourcefile和targetfile必须是<strong>文件</strong>的绝对路径，而不是文件名的绝对路径，否则程序会报错。</p>
-<h3 id="从命令行启动程序">从命令行启动程序</h3>
-<p>首先，看看你的程序是否可以从cmd启动，也是是<code>Win+R</code>打开cmd后输入程序的绝对路径，例如<code>E:\Program Files (x86)\Tencent\QQ\Bin\QQ.exe</code>回车，如果能跳出程序的话，好办了~<br>用subprocess的check_call方法直接调用就可以了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">subprocess.check_call([<span class="string">u"E:\\Program Files (x86)\\Tencent\\QQ\\Bin\\QQ.exe"</span>])</div></pre></td></tr></table></figure>
-
-<p>后面还可以跟好多参数，具体见这里<a href="https://docs.python.org/2.7/library/subprocess.html#subprocess.check_call" target="_blank" rel="external">https://docs.python.org/2.7/library/subprocess.html#subprocess.check_call</a><br>官方的说明如下：</p>
+		<h2 id="什么是LeetCode">什么是LeetCode</h2>
+<p>LeetCode 已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
+<p>LeetCode上面有很多算法可以作为平时的脑力训练，适当做一做也可以提升程序猿打怪的经验值。</p>
+<p>鄙人今年已经是第二个本命年了，有一种墙裂的不祥预感，俗称中年危机，所以要做做算法适当消遣来缓解压力。</p>
+<h2 id="题目解析">题目解析</h2>
+<p>题目如下：</p>
 <blockquote>
-<p>Run command with arguments. Wait for command to complete. If the return code was zero then return, otherwise raise CalledProcessError. </p>
+<p>Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.</p>
+<p>For example,<br>“A man, a plan, a canal: Panama” is a palindrome.<br>“race a car” is not a palindrome.</p>
 </blockquote>
-<p>好了，大功告成，现在贴一下做所有的代码:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=UTF-8</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">copyFiles</span><span class="params">(sourceDir, targetDir)</span>:</span>  <span class="comment"># 把某一文件夹下的指定文件复制到目标文件夹中    </span></div><div class="line">    fileList = [<span class="string">'1.dll'</span>, <span class="string">'2.dll'</span>, <span class="string">'3.dll'</span>, <span class="string">'4.dll'</span>, <span class="string">'5.dll'</span>, <span class="string">'6.dll'</span>,</div><div class="line">                <span class="string">'7.dll'</span>, <span class="string">'8.dll'</span>]</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> fileList:</div><div class="line">        sourceFile = os.path.join(sourceDir, item)</div><div class="line">        targetFile = os.path.join(targetDir, item)</div><div class="line">        <span class="keyword">if</span> os.path.isfile(sourceFile):</div><div class="line">            <span class="keyword">try</span>:                </div><div class="line">                open(targetFile, <span class="string">"wb"</span>).write(open(sourceFile, <span class="string">"rb"</span>).read())</div><div class="line">                <span class="keyword">print</span> (<span class="string">"'copy file "</span>,item,<span class="string">" successfully!'"</span>)</div><div class="line">            <span class="keyword">except</span> StandardError, e:</div><div class="line">                <span class="keyword">print</span> e.message</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:  <span class="comment"># 主函数</span></div><div class="line">    sourceDir = <span class="string">'D:\\my_program\\Debug\\bin'</span></div><div class="line">    targetStr=raw_input(<span class="string">'Press r to copy to release or others to copy to publish\n'</span>)</div><div class="line">    <span class="comment"># targetDir</span></div><div class="line">    <span class="keyword">if</span>(targetStr.lower()==<span class="string">'r'</span>):</div><div class="line">        targetDir = <span class="string">'D:\\my_program\\Release\\bin'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        targetDir=<span class="string">'D:\\my_program\\Publish\\bin'</span></div><div class="line">    copyFiles(sourceDir, targetDir)</div><div class="line">    subprocess.check_call([<span class="string">u"D:\\my_program\\target.exe"</span>])//通过命令行启动target.exe</div><div class="line">    raw_input(<span class="string">'Press any key to exit!'</span>)</div></pre></td></tr></table></figure>
+<p>Palindrome 直译过来叫回文。什么是回文？<del>大波美人鱼人美波大</del>，一句话解释，简单暴力，就是从左读和从右读是一样的，那程序思路就简单了，把字符串分成字符的数组，第一个和倒数第一个比较，第二个和倒数第二个比较，依此类推。</p>
+<p>python里面字符串就是一个由字符组成的序列，所以字符串和序列不需要转换大部分方法可以通用。</p>
+<h2 id="难度★☆☆☆☆">难度★☆☆☆☆</h2>
+<p>如果你要鄙视我，这种算法都要写博客，请<code>ctrl+w</code>，不用谢。</p>
+<h2 id="代码示例">代码示例</h2>
+<p>如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, s)</span>:</span></div><div class="line">        sumstr = []</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> s:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item.isalpha() <span class="keyword">or</span> <span class="keyword">not</span> item.isalnum():<span class="comment">#判断是否是数字或者字符</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                sumstr += item.lower()</div><div class="line">        <span class="keyword">if</span> sumstr.__len__() &gt; <span class="number">0</span>:</div><div class="line">            i = <span class="number">0</span></div><div class="line">            <span class="keyword">while</span> i &lt; sumstr.__len__() / <span class="number">2</span>:</div><div class="line">                <span class="keyword">if</span> sumstr[i] != sumstr[sumstr.__len__() - <span class="number">1</span> - i]:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                i += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:<span class="comment">#主函数</span></div><div class="line">    solu = Solution()</div><div class="line">    validStr = <span class="string">u"A man, a plan, a canal: Panama"</span></div><div class="line">    result = solu.isPalindrome(validStr)</div><div class="line">    print()</div></pre></td></tr></table></figure>
 
-<h2 id="总结">总结</h2>
-<p>如果没有这个程序，那么之前我需要打开sourceDir文件夹，在200多个文件中找到需要的dll，然后再打开targetDir,复制过去，会弹框说该目录下已存在此文件，把 <em>为之后7个冲突执行此操作</em> 打上勾，点复制和替换，找到target.exe，双击启动。现在呢，双击这个copydll.py文件，然后dll复制好了，程序也起来了，it works！</p>
+<h2 id="小结">小结</h2>
+<p>算法不难，但是如果是C#或者java的话可能要注意输入的字符串为空的情况，python可以直接转为长度为0的序列，目测不存在报错的问题。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -131,7 +122,7 @@ python复制文件
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/python/">python</a>
+  <span></span> <a href="/tags/python/">python</a><a href="/tags/leetcode/">leetcode</a>
   </div>
 
 </div>
@@ -139,7 +130,7 @@ python复制文件
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wfxiong1990.github.io/2014/10/25/copying-files-and-run-command-to-start-exe-via-python/" data-title="用python来拷贝文件到指定文件夹并启动对应程序 | Weifeng&#39;s Blog" data-tsina="1737020081" class="share clearfix">
+  <div data-url="http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/" data-title="【LeetCode算法训练】 判断字符串是否是回文 | Weifeng&#39;s Blog" data-tsina="1737020081" class="share clearfix">
   </div>
 
 </div>
@@ -148,19 +139,11 @@ python复制文件
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/11/04/Valid-Palindrome/" title="【LeetCode算法训练】 判断字符串是否是回文">
-  <strong>上一篇：</strong><br/>
-  <span>
-  【LeetCode算法训练】 判断字符串是否是回文</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/10/25/using-python-to-call-tuling123-api/"  title="用python实现图灵聊天机器人的接口">
+<a href="/2014/10/25/copying-files-and-run-command-to-start-exe-via-python/"  title="用python来拷贝文件到指定文件夹并启动对应程序">
  <strong>下一篇：</strong><br/> 
- <span>用python实现图灵聊天机器人的接口
+ <span>用python来拷贝文件到指定文件夹并启动对应程序
 </span>
 </a>
 </div>
@@ -180,7 +163,7 @@ python复制文件
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#码代码目的"><span class="toc-number">1.</span> <span class="toc-text">码代码目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始码代码"><span class="toc-number">2.</span> <span class="toc-text">开始码代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python复制文件"><span class="toc-number">2.1.</span> <span class="toc-text">python复制文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从命令行启动程序"><span class="toc-number">2.2.</span> <span class="toc-text">从命令行启动程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是LeetCode"><span class="toc-number">1.</span> <span class="toc-text">什么是LeetCode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目解析"><span class="toc-number">2.</span> <span class="toc-text">题目解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#难度★☆☆☆☆"><span class="toc-number">3.</span> <span class="toc-text">难度★☆☆☆☆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
  
   </div>
 

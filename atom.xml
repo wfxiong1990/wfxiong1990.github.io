@@ -4,7 +4,7 @@
   <subtitle><![CDATA[刷机熊也很忙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-10-28T15:10:31.567Z</updated>
+  <updated>2014-11-04T15:22:06.459Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
@@ -13,6 +13,45 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[【LeetCode算法训练】 判断字符串是否是回文]]></title>
+    <link href="http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/"/>
+    <id>http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/</id>
+    <published>2014-11-04T14:45:29.000Z</published>
+    <updated>2014-11-04T15:21:47.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="什么是LeetCode">什么是LeetCode</h2>
+<p>LeetCode 已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
+<p>LeetCode上面有很多算法可以作为平时的脑力训练，适当做一做也可以提升程序猿打怪的经验值。</p>
+<p>鄙人今年已经是第二个本命年了，有一种墙裂的不祥预感，俗称中年危机，所以要做做算法适当消遣来缓解压力。</p>
+<h2 id="题目解析">题目解析</h2>
+<p>题目如下：</p>
+<blockquote>
+<p>Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.</p>
+<p>For example,<br>“A man, a plan, a canal: Panama” is a palindrome.<br>“race a car” is not a palindrome.</p>
+</blockquote>
+<p>Palindrome 直译过来叫回文。什么是回文？<del>大波美人鱼人美波大</del>，一句话解释，简单暴力，就是从左读和从右读是一样的，那程序思路就简单了，把字符串分成字符的数组，第一个和倒数第一个比较，第二个和倒数第二个比较，依此类推。</p>
+<p>python里面字符串就是一个由字符组成的序列，所以字符串和序列不需要转换大部分方法可以通用。</p>
+<h2 id="难度★☆☆☆☆">难度★☆☆☆☆</h2>
+<p>如果你要鄙视我，这种算法都要写博客，请<code>ctrl+w</code>，不用谢。</p>
+<h2 id="代码示例">代码示例</h2>
+<p>如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, s)</span>:</span></div><div class="line">        sumstr = []</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> s:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item.isalpha() <span class="keyword">or</span> <span class="keyword">not</span> item.isalnum():<span class="comment">#判断是否是数字或者字符</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                sumstr += item.lower()</div><div class="line">        <span class="keyword">if</span> sumstr.__len__() &gt; <span class="number">0</span>:</div><div class="line">            i = <span class="number">0</span></div><div class="line">            <span class="keyword">while</span> i &lt; sumstr.__len__() / <span class="number">2</span>:</div><div class="line">                <span class="keyword">if</span> sumstr[i] != sumstr[sumstr.__len__() - <span class="number">1</span> - i]:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                i += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:<span class="comment">#主函数</span></div><div class="line">    solu = Solution()</div><div class="line">    validStr = <span class="string">u"A man, a plan, a canal: Panama"</span></div><div class="line">    result = solu.isPalindrome(validStr)</div><div class="line">    print()</div></pre></td></tr></table></figure>
+
+<h2 id="小结">小结</h2>
+<p>算法不难，但是如果是C#或者java的话可能要注意输入的字符串为空的情况，python可以直接转为长度为0的序列，目测不存在报错的问题。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="什么是LeetCode">什么是LeetCode</h2>
+<p>LeetCode 已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
+<p>LeetCode上面有很多算法可以作为平时的脑力]]>
+    </summary>
+    
+      <category term="python" scheme="http://wfxiong1990.github.io/tags/python/"/>
+    
+      <category term="leetcode" scheme="http://wfxiong1990.github.io/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[用python来拷贝文件到指定文件夹并启动对应程序]]></title>
