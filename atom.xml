@@ -4,7 +4,7 @@
   <subtitle><![CDATA[刷机熊也很忙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-11-04T15:22:06.459Z</updated>
+  <updated>2014-11-04T16:15:14.190Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
@@ -15,14 +15,56 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[【LeetCode算法训练】 输出杨辉三角形]]></title>
+    <link href="http://wfxiong1990.github.io/2014/11/04/Pascal-s-Triangle/"/>
+    <id>http://wfxiong1990.github.io/2014/11/04/Pascal-s-Triangle/</id>
+    <published>2014-11-04T15:42:48.000Z</published>
+    <updated>2014-11-04T16:15:07.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="什么是杨辉三角形">什么是杨辉三角形</h2>
+<p>如图所示吧，暂时还没来得及学习MarkDown的数学公式的写法<br><img src="http://ww3.sinaimg.cn/large/6788d2b1jw1elzekp4nnvj20pz0drtb5.jpg" alt=""></p>
+<h2 id="题解">题解</h2>
+<p>本题目<a href="https://oj.leetcode.com/problems/pascals-triangle/" target="_blank" rel="external">英文说明</a>如下：</p>
+<pre><code>Given numRows, <span class="keyword">generate</span> the first numRows <span class="keyword">of</span> Pascal<span class="attribute">'s</span> triangle.
+
+<span class="keyword">For</span> example, given numRows = <span class="number">5</span>,
+<span class="keyword">Return</span>
+
+[
+     [<span class="number">1</span>],
+    [<span class="number">1</span>,<span class="number">1</span>],
+   [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>],
+  [<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>],
+ [<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">1</span>]
+]
+</code></pre><p>输入数字5，那么出来的就是行数为5的杨辉三角形。可以分解为一行一行来看，每一行的第N个元素都是上面一行的N-1个元素加上第N个元素，如果N-1或者N元素不存在，那么用0代替，那么应该用函数递归来实现咯。想通了就是这么简单，take it easy!</p>
+<h2 id="代码示例">代码示例</h2>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=UTF-8</span></div><div class="line">__author__ = <span class="string">'weifeng'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generatechild</span><span class="params">(numRows)</span>:</span> <span class="comment">#生成杨辉三角形的第numRows行</span></div><div class="line">    <span class="keyword">if</span> numRows&lt;<span class="number">1</span>: <span class="comment">#输入非法时做判断</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    <span class="keyword">if</span> numRows == <span class="number">1</span>: <span class="comment">#第一行</span></div><div class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        last = generatechild(numRows - <span class="number">1</span>) <span class="comment">#递归</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        reslist = []</div><div class="line">        <span class="keyword">while</span> i &lt; numRows:</div><div class="line">            val1 = <span class="number">0</span></div><div class="line">            val2 = <span class="number">0</span></div><div class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= i &lt; last.__len__(): <span class="comment">#很神奇地发现python可以实现 0&lt;i&lt;n这种写法，注意把i换成i-1的时候要打括号</span></div><div class="line">                val1 = last[i]</div><div class="line">            <span class="keyword">if</span> i-<span class="number">1</span>&gt;=<span class="number">0</span> <span class="keyword">and</span> i - <span class="number">1</span> &lt; last.__len__(): <span class="comment">#还要注意等于的情况</span></div><div class="line">                val2 = last[i - <span class="number">1</span>]</div><div class="line">            reslist.append(val1 + val2)</div><div class="line">            i += <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> reslist</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(numRows)</span>:</span> <span class="comment">#生成行数为numRows的完整杨辉三角形</span></div><div class="line">    i=<span class="number">1</span></div><div class="line">    result=[]</div><div class="line">    <span class="keyword">while</span> i&lt;=numRows: <span class="comment">#目前没有发现 for(i=0;i&lt;count;i++)的写法，只能用while来代替</span></div><div class="line">        result.append(generatechild(i))</div><div class="line">        i+=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> result</div><div class="line"></div><div class="line">lst = generate(<span class="number">5</span>)</div><div class="line"><span class="keyword">print</span> lst</div></pre></td></tr></table></figure>
+
+<h2 id="小结">小结</h2>
+<p>考察递归的使用，其实只要面向对象编程，思路总归是一样的，注意输入小于1的情况，有个预判比程序报错来的更为优雅。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="什么是杨辉三角形">什么是杨辉三角形</h2>
+<p>如图所示吧，暂时还没来得及学习MarkDown的数学公式的写法<br><img src="http://ww3.sinaimg.cn/large/6788d2b1jw1elzekp4nnvj20pz0drtb5]]>
+    </summary>
+    
+      <category term="python" scheme="http://wfxiong1990.github.io/tags/python/"/>
+    
+      <category term="leetcode" scheme="http://wfxiong1990.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[【LeetCode算法训练】 判断字符串是否是回文]]></title>
     <link href="http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/"/>
     <id>http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/</id>
     <published>2014-11-04T14:45:29.000Z</published>
-    <updated>2014-11-04T15:21:47.000Z</updated>
+    <updated>2014-11-04T16:14:20.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是LeetCode">什么是LeetCode</h2>
-<p>LeetCode 已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
+<p>LeetCode <a href="http://weibo.com/leetcode" target="_blank" rel="external">http://weibo.com/leetcode</a>已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
 <p>LeetCode上面有很多算法可以作为平时的脑力训练，适当做一做也可以提升程序猿打怪的经验值。</p>
+<p>最近酷壳网的<a href="http://weibo.com/haoel" target="_blank" rel="external">左耳朵耗子</a> 在酷壳公布了所有LeetCode算法的答案（C++版）。为了追随大神的脚步，我决定一步步地用python来实现（实在做不出来可以抄一下思路么，一秒回到毕业前啊～）。</p>
 <p>鄙人今年已经是第二个本命年了，有一种墙裂的不祥预感，俗称中年危机，所以要做做算法适当消遣来缓解压力。</p>
 <h2 id="题目解析">题目解析</h2>
 <p>题目如下：</p>
@@ -36,15 +78,14 @@
 <p>如果你要鄙视我，这种算法都要写博客，请<code>ctrl+w</code>，不用谢。</p>
 <h2 id="代码示例">代码示例</h2>
 <p>如下所示：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, s)</span>:</span></div><div class="line">        sumstr = []</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> s:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item.isalpha() <span class="keyword">or</span> <span class="keyword">not</span> item.isalnum():<span class="comment">#判断是否是数字或者字符</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                sumstr += item.lower()</div><div class="line">        <span class="keyword">if</span> sumstr.__len__() &gt; <span class="number">0</span>:</div><div class="line">            i = <span class="number">0</span></div><div class="line">            <span class="keyword">while</span> i &lt; sumstr.__len__() / <span class="number">2</span>:</div><div class="line">                <span class="keyword">if</span> sumstr[i] != sumstr[sumstr.__len__() - <span class="number">1</span> - i]:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                i += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:<span class="comment">#主函数</span></div><div class="line">    solu = Solution()</div><div class="line">    validStr = <span class="string">u"A man, a plan, a canal: Panama"</span></div><div class="line">    result = solu.isPalindrome(validStr)</div><div class="line">    print()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=UTF-8</span></div><div class="line">__author__ = <span class="string">'weifeng'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, s)</span>:</span></div><div class="line">        sumstr = []</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> s:</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> item.isalpha() <span class="keyword">or</span> <span class="keyword">not</span> item.isalnum():<span class="comment">#判断是否是数字或者字符</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                sumstr += item.lower()</div><div class="line">        <span class="keyword">if</span> sumstr.__len__() &gt; <span class="number">0</span>:</div><div class="line">            i = <span class="number">0</span></div><div class="line">            <span class="keyword">while</span> i &lt; sumstr.__len__() / <span class="number">2</span>:</div><div class="line">                <span class="keyword">if</span> sumstr[i] != sumstr[sumstr.__len__() - <span class="number">1</span> - i]:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">                i += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:<span class="comment">#主函数</span></div><div class="line">    solu = Solution()</div><div class="line">    validStr = <span class="string">u"A man, a plan, a canal: Panama"</span></div><div class="line">    result = solu.isPalindrome(validStr)</div><div class="line">    <span class="keyword">print</span> result</div></pre></td></tr></table></figure>
 
 <h2 id="小结">小结</h2>
 <p>算法不难，但是如果是C#或者java的话可能要注意输入的字符串为空的情况，python可以直接转为长度为0的序列，目测不存在报错的问题。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="什么是LeetCode">什么是LeetCode</h2>
-<p>LeetCode 已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
-<p>LeetCode上面有很多算法可以作为平时的脑力]]>
+<p>LeetCode <a href="http://weibo.com/leetcode" target="_blank" rel="external">http://weibo.com/leetco]]>
     </summary>
     
       <category term="python" scheme="http://wfxiong1990.github.io/tags/python/"/>
