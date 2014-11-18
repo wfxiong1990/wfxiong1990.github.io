@@ -4,7 +4,7 @@
   <subtitle><![CDATA[刷机熊也很忙]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://wfxiong1990.github.io/"/>
-  <updated>2014-11-04T16:15:14.190Z</updated>
+  <updated>2014-11-18T15:15:29.173Z</updated>
   <id>http://wfxiong1990.github.io/</id>
   
   <author>
@@ -15,11 +15,85 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[【LeetCode算法训练】 二叉树路径之和]]></title>
+    <link href="http://wfxiong1990.github.io/2014/11/05/path-sum/"/>
+    <id>http://wfxiong1990.github.io/2014/11/05/path-sum/</id>
+    <published>2014-11-05T08:35:07.000Z</published>
+    <updated>2014-11-18T15:13:20.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="二叉树结构">二叉树结构</h2>
+<p>二叉树的定义如下：<a href="http://zh.wikipedia.org/wiki/二叉树" target="_blank" rel="external">http://zh.wikipedia.org/wiki/二叉树</a>。</p>
+<pre><code>二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”（<span class="keyword">left</span> subtree）和“右子树”（<span class="keyword">right</span> subtree）。二叉树常被用于实现二叉查找树和二叉堆。
+
+二叉树的每个结点至多只有二棵子树(不存在度大于<span class="number">2</span>的结点)，二叉树的子树有左右之分，次序不能颠倒。
+</code></pre><p>二叉树是最容易叫人在白板上写算法的数据结构，基本上等同于中学语文里鲁迅的地位了。</p>
+<p>首先，你得用python来实现一个二叉树节点的结构，实现方法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val, left=None, right=None)</span>:</span></div><div class="line">        self.val = val</div><div class="line">        self.left = left</div><div class="line">        self.right = right</div></pre></td></tr></table></figure>
+
+<p>python是动态脚本语言，写法上跟C#和java区别还是蛮大的，python初始化本节点的值为val，左右节点可由形参传入，也可不传。</p>
+<p>比较一下二叉树C#的实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Node</div><div class="line">{</div><div class="line">    <span class="keyword">public</span> Node Left;</div><div class="line">    <span class="keyword">public</span> Node Right;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Data;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="title">Node</span>(<span class="keyword">int</span> data)</div><div class="line">    {</div><div class="line">        Data = data;</div><div class="line">        Left =  <span class="keyword">null</span>;</div><div class="line">		Right = <span class="keyword">null</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>C#初始化节点时就只能用int值传入，但是python貌似都可以，只是后面解析起来要做预判了。</p>
+<h2 id="难度★★☆☆☆">难度★★☆☆☆</h2>
+<p>写代码来递归好像木有自己数数字容易。</p>
+<h2 id="二叉树的节点插入">二叉树的节点插入</h2>
+<p>如果root节点的左节点为空，那么<code>root.left=Node(你的左节点值)</code>；如果左节点不为空，那么类似链表插入的方法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tree = <span class="type">BinaryTree</span>(newValue)</div><div class="line"><span class="keyword">self</span>.<span class="keyword">left</span> = tree</div><div class="line">tree.<span class="keyword">left</span> = <span class="keyword">self</span>.<span class="keyword">left</span></div></pre></td></tr></table></figure>
+
+<p>先让当前节点的左边指向新建的实例tree,然后让tree的左边指向当前节点原先左边的节点。瞬间脑补了当年C语言程序设计时链表插入时的无知和迷茫了。</p>
+<p>由于本程序直接初始化的时候传入了左节点和右节点，所以这种方法仅供参考，<a href="http://stackoverflow.com/posts/25859412/revisions" target="_blank" rel="external">stackoverflow上的例子</a>。</p>
+<h2 id="题解">题解</h2>
+<p>leetcode上题目如下：<br>    Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+<pre><code>For example:
+Given <span class="operator">the</span> below binary tree <span class="operator">and</span> <span class="built_in">sum</span> = <span class="number">22</span>,
+              <span class="number">5</span>
+             / \
+            <span class="number">4</span>   <span class="number">8</span>
+           /   / \
+          <span class="number">11</span>  <span class="number">13</span>  <span class="number">4</span>
+         /  \      \
+        <span class="number">7</span>    <span class="number">2</span>      <span class="number">1</span>
+<span class="constant">return</span> <span class="constant">true</span>, <span class="keyword">as</span> there exist <span class="operator">a</span> root-<span class="built_in">to</span>-leaf path <span class="number">5</span>-&gt;<span class="number">4</span>-&gt;<span class="number">11</span>-&gt;<span class="number">2</span> which <span class="built_in">sum</span> is <span class="number">22.</span>
+</code></pre><p>首先要实现这个二叉树，我的方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node = TreeNode(<span class="number">5</span>, TreeNode(<span class="number">4</span>, TreeNode(<span class="number">11</span>, <span class="number">7</span>, <span class="number">2</span>)), TreeNode(<span class="number">8</span>, <span class="number">13</span>, TreeNode(<span class="number">4</span>, <span class="keyword">None</span>, <span class="number">1</span>)))</div></pre></td></tr></table></figure>
+
+<p>根节点是5，左节点是个子二叉树，那么左节点是一个二叉树的类，其中左节点的值是4，那么左节点的二叉树的根节点为4，如果这个根节点的左节点又是二叉树的话，那么又是一个<code>TreeNode</code>的类。</p>
+<p>要判断22是不是二叉树某条路径节点之和，这个二叉树简单，可以自己数数。</p>
+<blockquote>
+<pre><code>             5
+            /
+           4
+          /
+         11
+           <span class="command">\
+</span>            2
+</code></pre></blockquote>
+<p>很明显，这条路径节点之和就是22，所以如果sum=22，应该return true。<br>那么讲一下计算机怎么判断是否return true。</p>
+<h2 id="寻找所有二叉树的路径是否存在路径上节点和">寻找所有二叉树的路径是否存在路径上节点和</h2>
+<p>基本思路是：如果该节点的value不等于给定的sum值，那么从左节点（如果有）开始，判断左节点为root节点的二叉树的是否存在路径之和等于sum-父节点的value。如果左节点没有该路径，那么切换到右节点，继续递归。</p>
+<p>好了，基本的思路就是这样子的。下面是这部分的代码，并验证这个solution是否正确：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line">__author__ = <span class="string">'wfxiong1990'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val, left=None, right=None)</span>:</span></div><div class="line">        self.val = val</div><div class="line">        self.left = left</div><div class="line">        self.right = right</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param root, a tree node</span></div><div class="line">    <span class="comment"># @param sum, an integer</span></div><div class="line">    <span class="comment"># @return a boolean</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasPathSum</span><span class="params">(self, root, sum)</span>:</span></div><div class="line">        <span class="keyword">if</span> isinstance(root, TreeNode): <span class="comment">#如果是节点是二叉树结构，遍历左右节点值</span></div><div class="line">            result = sum - root.val</div><div class="line">            <span class="keyword">if</span> root.left <span class="keyword">and</span> self.hasPathSum(root.left, result):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">if</span> root.right <span class="keyword">and</span> self.hasPathSum(root.right, result):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">elif</span> isinstance(root, int): <span class="comment">#如果节点是int类型，即最下面的节点，检查是否等于sum-该路径上面的所有其他节点值</span></div><div class="line">            result = sum - root</div><div class="line">            <span class="keyword">return</span> result == <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line">node = TreeNode(<span class="number">5</span>, TreeNode(<span class="number">4</span>, TreeNode(<span class="number">11</span>, <span class="number">7</span>, <span class="number">2</span>)), TreeNode(<span class="number">8</span>, <span class="number">13</span>, TreeNode(<span class="number">4</span>, <span class="keyword">None</span>, <span class="number">1</span>)))</div><div class="line">solution = Solution()</div><div class="line">result = solution.hasPathSum(node, <span class="number">22</span>)</div><div class="line"><span class="keyword">print</span> result</div></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<p>二叉树，屡战屡崩溃，其实就是基本的递归，好吧，这一题我偷看了答案，又让我想起了前序遍历 中序遍历 后序遍历 的那些神奇的代码。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="二叉树结构">二叉树结构</h2>
+<p>二叉树的定义如下：<a href="http://zh.wikipedia.org/wiki/二叉树" target="_blank" rel="external">http://zh.wikipedia.org/wiki]]>
+    </summary>
+    
+      <category term="python" scheme="http://wfxiong1990.github.io/tags/python/"/>
+    
+      <category term="leetcode" scheme="http://wfxiong1990.github.io/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[【LeetCode算法训练】 输出杨辉三角形]]></title>
     <link href="http://wfxiong1990.github.io/2014/11/04/Pascal-s-Triangle/"/>
     <id>http://wfxiong1990.github.io/2014/11/04/Pascal-s-Triangle/</id>
     <published>2014-11-04T15:42:48.000Z</published>
-    <updated>2014-11-04T16:15:07.000Z</updated>
+    <updated>2014-11-18T15:13:20.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是杨辉三角形">什么是杨辉三角形</h2>
 <p>如图所示吧，暂时还没来得及学习MarkDown的数学公式的写法<br><img src="http://ww3.sinaimg.cn/large/6788d2b1jw1elzekp4nnvj20pz0drtb5.jpg" alt=""></p>
 <h2 id="题解">题解</h2>
@@ -37,6 +111,8 @@
  [<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">1</span>]
 ]
 </code></pre><p>输入数字5，那么出来的就是行数为5的杨辉三角形。可以分解为一行一行来看，每一行的第N个元素都是上面一行的N-1个元素加上第N个元素，如果N-1或者N元素不存在，那么用0代替，那么应该用函数递归来实现咯。想通了就是这么简单，take it easy!</p>
+<h2 id="难度★☆☆☆☆">难度★☆☆☆☆</h2>
+<p>算法不难，但是要把所有的情况考虑清楚，并用python来实现，大家可以自己试试，注意几种临界情况，比如没有加小于<strong>等于</strong>导致程序没输出预想的结果。</p>
 <h2 id="代码示例">代码示例</h2>
 <p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=UTF-8</span></div><div class="line">__author__ = <span class="string">'weifeng'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generatechild</span><span class="params">(numRows)</span>:</span> <span class="comment">#生成杨辉三角形的第numRows行</span></div><div class="line">    <span class="keyword">if</span> numRows&lt;<span class="number">1</span>: <span class="comment">#输入非法时做判断</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    <span class="keyword">if</span> numRows == <span class="number">1</span>: <span class="comment">#第一行</span></div><div class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        last = generatechild(numRows - <span class="number">1</span>) <span class="comment">#递归</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        reslist = []</div><div class="line">        <span class="keyword">while</span> i &lt; numRows:</div><div class="line">            val1 = <span class="number">0</span></div><div class="line">            val2 = <span class="number">0</span></div><div class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= i &lt; last.__len__(): <span class="comment">#很神奇地发现python可以实现 0&lt;i&lt;n这种写法，注意把i换成i-1的时候要打括号</span></div><div class="line">                val1 = last[i]</div><div class="line">            <span class="keyword">if</span> i-<span class="number">1</span>&gt;=<span class="number">0</span> <span class="keyword">and</span> i - <span class="number">1</span> &lt; last.__len__(): <span class="comment">#还要注意等于的情况</span></div><div class="line">                val2 = last[i - <span class="number">1</span>]</div><div class="line">            reslist.append(val1 + val2)</div><div class="line">            i += <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> reslist</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(numRows)</span>:</span> <span class="comment">#生成行数为numRows的完整杨辉三角形</span></div><div class="line">    i=<span class="number">1</span></div><div class="line">    result=[]</div><div class="line">    <span class="keyword">while</span> i&lt;=numRows: <span class="comment">#目前没有发现 for(i=0;i&lt;count;i++)的写法，只能用while来代替</span></div><div class="line">        result.append(generatechild(i))</div><div class="line">        i+=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> result</div><div class="line"></div><div class="line">lst = generate(<span class="number">5</span>)</div><div class="line"><span class="keyword">print</span> lst</div></pre></td></tr></table></figure>
@@ -60,7 +136,7 @@
     <link href="http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/"/>
     <id>http://wfxiong1990.github.io/2014/11/04/Valid-Palindrome/</id>
     <published>2014-11-04T14:45:29.000Z</published>
-    <updated>2014-11-04T16:14:20.000Z</updated>
+    <updated>2014-11-18T15:13:20.000Z</updated>
     <content type="html"><![CDATA[<h2 id="什么是LeetCode">什么是LeetCode</h2>
 <p>LeetCode <a href="http://weibo.com/leetcode" target="_blank" rel="external">http://weibo.com/leetcode</a>已是一个针对程序员招聘的颇具口碑的准备面试平台。虽然主要针对北美市场，但是内容也能很好的帮助大部分国内的IT面试者。</p>
 <p>LeetCode上面有很多算法可以作为平时的脑力训练，适当做一做也可以提升程序猿打怪的经验值。</p>
@@ -68,11 +144,12 @@
 <p>鄙人今年已经是第二个本命年了，有一种墙裂的不祥预感，俗称中年危机，所以要做做算法适当消遣来缓解压力。</p>
 <h2 id="题目解析">题目解析</h2>
 <p>题目如下：</p>
-<blockquote>
-<p>Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.</p>
-<p>For example,<br>“A man, a plan, a canal: Panama” is a palindrome.<br>“race a car” is not a palindrome.</p>
-</blockquote>
-<p>Palindrome 直译过来叫回文。什么是回文？<del>大波美人鱼人美波大</del>，一句话解释，简单暴力，就是从左读和从右读是一样的，那程序思路就简单了，把字符串分成字符的数组，第一个和倒数第一个比较，第二个和倒数第二个比较，依此类推。</p>
+<pre><code>Given a <span class="type">string</span>, determine <span class="keyword">if</span> <span class="keyword">it</span> <span class="keyword">is</span> a palindrome, <span class="keyword">considering</span> only alphanumeric <span class="property">characters</span> <span class="keyword">and</span> <span class="keyword">ignoring</span> cases.
+
+For example,
+<span class="string">"A man, a plan, a canal: Panama"</span> <span class="keyword">is</span> a palindrome.
+<span class="string">"race a car"</span> <span class="keyword">is</span> <span class="keyword">not</span> a palindrome.
+</code></pre><p>Palindrome 直译过来叫回文。什么是回文？<del>大波美人鱼人美波大</del>，一句话解释，简单暴力，就是从左读和从右读是一样的，那程序思路就简单了，把字符串分成字符的数组，第一个和倒数第一个比较，第二个和倒数第二个比较，依此类推。</p>
 <p>python里面字符串就是一个由字符组成的序列，所以字符串和序列不需要转换大部分方法可以通用。</p>
 <h2 id="难度★☆☆☆☆">难度★☆☆☆☆</h2>
 <p>如果你要鄙视我，这种算法都要写博客，请<code>ctrl+w</code>，不用谢。</p>

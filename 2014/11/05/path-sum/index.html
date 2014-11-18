@@ -1,0 +1,463 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>【LeetCode算法训练】 二叉树路径之和 | Weifeng&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Weifeng Xiong">
+    
+    <meta name="description" content="二叉树结构
+二叉树的定义如下：http://zh.wikipedia.org/wiki/二叉树。
+二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”（left subtree）和“右子树”（right subtree）。二叉树常被用于实现二叉查找树和二叉堆。
+
+二叉树的每个结点至多只有">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="Weifeng&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Weifeng&#39;s Blog" title="Weifeng&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Weifeng&#39;s Blog">Weifeng&#39;s Blog</a></h1>
+				<h2 class="blog-motto">刷机熊也很忙</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:wfxiong1990.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/05/path-sum/" title="【LeetCode算法训练】 二叉树路径之和" itemprop="url">【LeetCode算法训练】 二叉树路径之和</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/112898171288857862916?rel=author" title="Weifeng Xiong" target="_blank" itemprop="author">Weifeng Xiong</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-05T08:35:07.000Z" itemprop="datePublished"> 发表于 11月 5 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树结构"><span class="toc-number">1.</span> <span class="toc-text">二叉树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#难度★★☆☆☆"><span class="toc-number">2.</span> <span class="toc-text">难度★★☆☆☆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的节点插入"><span class="toc-number">3.</span> <span class="toc-text">二叉树的节点插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">4.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻找所有二叉树的路径是否存在路径上节点和"><span class="toc-number">5.</span> <span class="toc-text">寻找所有二叉树的路径是否存在路径上节点和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="二叉树结构">二叉树结构</h2>
+<p>二叉树的定义如下：<a href="http://zh.wikipedia.org/wiki/二叉树" target="_blank" rel="external">http://zh.wikipedia.org/wiki/二叉树</a>。</p>
+<pre><code>二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”（<span class="keyword">left</span> subtree）和“右子树”（<span class="keyword">right</span> subtree）。二叉树常被用于实现二叉查找树和二叉堆。
+
+二叉树的每个结点至多只有二棵子树(不存在度大于<span class="number">2</span>的结点)，二叉树的子树有左右之分，次序不能颠倒。
+</code></pre><p>二叉树是最容易叫人在白板上写算法的数据结构，基本上等同于中学语文里鲁迅的地位了。</p>
+<p>首先，你得用python来实现一个二叉树节点的结构，实现方法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val, left=None, right=None)</span>:</span></div><div class="line">        self.val = val</div><div class="line">        self.left = left</div><div class="line">        self.right = right</div></pre></td></tr></table></figure>
+
+<p>python是动态脚本语言，写法上跟C#和java区别还是蛮大的，python初始化本节点的值为val，左右节点可由形参传入，也可不传。</p>
+<p>比较一下二叉树C#的实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Node</div><div class="line">{</div><div class="line">    <span class="keyword">public</span> Node Left;</div><div class="line">    <span class="keyword">public</span> Node Right;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Data;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="title">Node</span>(<span class="keyword">int</span> data)</div><div class="line">    {</div><div class="line">        Data = data;</div><div class="line">        Left =  <span class="keyword">null</span>;</div><div class="line">		Right = <span class="keyword">null</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>C#初始化节点时就只能用int值传入，但是python貌似都可以，只是后面解析起来要做预判了。</p>
+<h2 id="难度★★☆☆☆">难度★★☆☆☆</h2>
+<p>写代码来递归好像木有自己数数字容易。</p>
+<h2 id="二叉树的节点插入">二叉树的节点插入</h2>
+<p>如果root节点的左节点为空，那么<code>root.left=Node(你的左节点值)</code>；如果左节点不为空，那么类似链表插入的方法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tree = <span class="type">BinaryTree</span>(newValue)</div><div class="line"><span class="keyword">self</span>.<span class="keyword">left</span> = tree</div><div class="line">tree.<span class="keyword">left</span> = <span class="keyword">self</span>.<span class="keyword">left</span></div></pre></td></tr></table></figure>
+
+<p>先让当前节点的左边指向新建的实例tree,然后让tree的左边指向当前节点原先左边的节点。瞬间脑补了当年C语言程序设计时链表插入时的无知和迷茫了。</p>
+<p>由于本程序直接初始化的时候传入了左节点和右节点，所以这种方法仅供参考，<a href="http://stackoverflow.com/posts/25859412/revisions" target="_blank" rel="external">stackoverflow上的例子</a>。</p>
+<h2 id="题解">题解</h2>
+<p>leetcode上题目如下：<br>    Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+<pre><code>For example:
+Given <span class="operator">the</span> below binary tree <span class="operator">and</span> <span class="built_in">sum</span> = <span class="number">22</span>,
+              <span class="number">5</span>
+             / \
+            <span class="number">4</span>   <span class="number">8</span>
+           /   / \
+          <span class="number">11</span>  <span class="number">13</span>  <span class="number">4</span>
+         /  \      \
+        <span class="number">7</span>    <span class="number">2</span>      <span class="number">1</span>
+<span class="constant">return</span> <span class="constant">true</span>, <span class="keyword">as</span> there exist <span class="operator">a</span> root-<span class="built_in">to</span>-leaf path <span class="number">5</span>-&gt;<span class="number">4</span>-&gt;<span class="number">11</span>-&gt;<span class="number">2</span> which <span class="built_in">sum</span> is <span class="number">22.</span>
+</code></pre><p>首先要实现这个二叉树，我的方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node = TreeNode(<span class="number">5</span>, TreeNode(<span class="number">4</span>, TreeNode(<span class="number">11</span>, <span class="number">7</span>, <span class="number">2</span>)), TreeNode(<span class="number">8</span>, <span class="number">13</span>, TreeNode(<span class="number">4</span>, <span class="keyword">None</span>, <span class="number">1</span>)))</div></pre></td></tr></table></figure>
+
+<p>根节点是5，左节点是个子二叉树，那么左节点是一个二叉树的类，其中左节点的值是4，那么左节点的二叉树的根节点为4，如果这个根节点的左节点又是二叉树的话，那么又是一个<code>TreeNode</code>的类。</p>
+<p>要判断22是不是二叉树某条路径节点之和，这个二叉树简单，可以自己数数。</p>
+<blockquote>
+<pre><code>             5
+            /
+           4
+          /
+         11
+           <span class="command">\
+</span>            2
+</code></pre></blockquote>
+<p>很明显，这条路径节点之和就是22，所以如果sum=22，应该return true。<br>那么讲一下计算机怎么判断是否return true。</p>
+<h2 id="寻找所有二叉树的路径是否存在路径上节点和">寻找所有二叉树的路径是否存在路径上节点和</h2>
+<p>基本思路是：如果该节点的value不等于给定的sum值，那么从左节点（如果有）开始，判断左节点为root节点的二叉树的是否存在路径之和等于sum-父节点的value。如果左节点没有该路径，那么切换到右节点，继续递归。</p>
+<p>好了，基本的思路就是这样子的。下面是这部分的代码，并验证这个solution是否正确：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line">__author__ = <span class="string">'wfxiong1990'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val, left=None, right=None)</span>:</span></div><div class="line">        self.val = val</div><div class="line">        self.left = left</div><div class="line">        self.right = right</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># @param root, a tree node</span></div><div class="line">    <span class="comment"># @param sum, an integer</span></div><div class="line">    <span class="comment"># @return a boolean</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasPathSum</span><span class="params">(self, root, sum)</span>:</span></div><div class="line">        <span class="keyword">if</span> isinstance(root, TreeNode): <span class="comment">#如果是节点是二叉树结构，遍历左右节点值</span></div><div class="line">            result = sum - root.val</div><div class="line">            <span class="keyword">if</span> root.left <span class="keyword">and</span> self.hasPathSum(root.left, result):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">if</span> root.right <span class="keyword">and</span> self.hasPathSum(root.right, result):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">elif</span> isinstance(root, int): <span class="comment">#如果节点是int类型，即最下面的节点，检查是否等于sum-该路径上面的所有其他节点值</span></div><div class="line">            result = sum - root</div><div class="line">            <span class="keyword">return</span> result == <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"></div><div class="line">node = TreeNode(<span class="number">5</span>, TreeNode(<span class="number">4</span>, TreeNode(<span class="number">11</span>, <span class="number">7</span>, <span class="number">2</span>)), TreeNode(<span class="number">8</span>, <span class="number">13</span>, TreeNode(<span class="number">4</span>, <span class="keyword">None</span>, <span class="number">1</span>)))</div><div class="line">solution = Solution()</div><div class="line">result = solution.hasPathSum(node, <span class="number">22</span>)</div><div class="line"><span class="keyword">print</span> result</div></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<p>二叉树，屡战屡崩溃，其实就是基本的递归，好吧，这一题我偷看了答案，又让我想起了前序遍历 中序遍历 后序遍历 的那些神奇的代码。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/python/">python</a><a href="/tags/leetcode/">leetcode</a>
+  </div>
+
+</div>
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://wfxiong1990.github.io/2014/11/05/path-sum/" data-title="【LeetCode算法训练】 二叉树路径之和 | Weifeng&#39;s Blog" data-tsina="1737020081" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2014/11/04/Pascal-s-Triangle/"  title="【LeetCode算法训练】 输出杨辉三角形">
+ <strong>下一篇：</strong><br/> 
+ <span>【LeetCode算法训练】 输出杨辉三角形
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+<a href="https://github.com/wfxiong1990"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树结构"><span class="toc-number">1.</span> <span class="toc-text">二叉树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#难度★★☆☆☆"><span class="toc-number">2.</span> <span class="toc-text">难度★★☆☆☆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的节点插入"><span class="toc-number">3.</span> <span class="toc-text">二叉树的节点插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">4.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻找所有二叉树的路径是否存在路径上节点和"><span class="toc-number">5.</span> <span class="toc-text">寻找所有二叉树的路径是否存在路径上节点和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/python/" title="python">python<sup>5</sup></a></li>
+		
+			<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=1737020081&verifier=1a54b128&dpc=1"></iframe>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://hamletsoft.com/" target="_blank" title="">一个人的时间简史</a></li>
+      <li><a href="http://lianliu.me/" target="_blank" title="">Daodao's Blog</a></li>
+      <li><a href="http://wuchong.me" target="_blank" title="WuChong">Jark's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Stay hungry, stay foolish <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1737020081" target="_blank" class="icon-weibo" title="weibo"></a>
+		
+		
+		<a href="https://github.com/wfxiong1990" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		<a href="https://www.facebook.com/weifeng.xiong.5" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		<a href="https://plus.google.com/112898171288857862916?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:wfxiong1990@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © 2014 
+		
+		<a href="http://wfxiong1990.github.io/about" target="_blank" title="Weifeng Xiong">Weifeng Xiong</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"wfxiong1990"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+
+
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<script src="/js/totop.js"></script>
+
+
+
+
+  </body>
+</html>

@@ -93,7 +93,7 @@ For example, given numRows = 5">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是杨辉三角形"><span class="toc-number">1.</span> <span class="toc-text">什么是杨辉三角形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">3.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是杨辉三角形"><span class="toc-number">1.</span> <span class="toc-text">什么是杨辉三角形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#难度★☆☆☆☆"><span class="toc-number">3.</span> <span class="toc-text">难度★☆☆☆☆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
 		
 		</div>
 		
@@ -114,6 +114,8 @@ For example, given numRows = 5">
  [<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">1</span>]
 ]
 </code></pre><p>输入数字5，那么出来的就是行数为5的杨辉三角形。可以分解为一行一行来看，每一行的第N个元素都是上面一行的N-1个元素加上第N个元素，如果N-1或者N元素不存在，那么用0代替，那么应该用函数递归来实现咯。想通了就是这么简单，take it easy!</p>
+<h2 id="难度★☆☆☆☆">难度★☆☆☆☆</h2>
+<p>算法不难，但是要把所有的情况考虑清楚，并用python来实现，大家可以自己试试，注意几种临界情况，比如没有加小于<strong>等于</strong>导致程序没输出预想的结果。</p>
 <h2 id="代码示例">代码示例</h2>
 <p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=UTF-8</span></div><div class="line">__author__ = <span class="string">'weifeng'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generatechild</span><span class="params">(numRows)</span>:</span> <span class="comment">#生成杨辉三角形的第numRows行</span></div><div class="line">    <span class="keyword">if</span> numRows&lt;<span class="number">1</span>: <span class="comment">#输入非法时做判断</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">    <span class="keyword">if</span> numRows == <span class="number">1</span>: <span class="comment">#第一行</span></div><div class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        last = generatechild(numRows - <span class="number">1</span>) <span class="comment">#递归</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        reslist = []</div><div class="line">        <span class="keyword">while</span> i &lt; numRows:</div><div class="line">            val1 = <span class="number">0</span></div><div class="line">            val2 = <span class="number">0</span></div><div class="line">            <span class="keyword">if</span> <span class="number">0</span> &lt;= i &lt; last.__len__(): <span class="comment">#很神奇地发现python可以实现 0&lt;i&lt;n这种写法，注意把i换成i-1的时候要打括号</span></div><div class="line">                val1 = last[i]</div><div class="line">            <span class="keyword">if</span> i-<span class="number">1</span>&gt;=<span class="number">0</span> <span class="keyword">and</span> i - <span class="number">1</span> &lt; last.__len__(): <span class="comment">#还要注意等于的情况</span></div><div class="line">                val2 = last[i - <span class="number">1</span>]</div><div class="line">            reslist.append(val1 + val2)</div><div class="line">            i += <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> reslist</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span><span class="params">(numRows)</span>:</span> <span class="comment">#生成行数为numRows的完整杨辉三角形</span></div><div class="line">    i=<span class="number">1</span></div><div class="line">    result=[]</div><div class="line">    <span class="keyword">while</span> i&lt;=numRows: <span class="comment">#目前没有发现 for(i=0;i&lt;count;i++)的写法，只能用while来代替</span></div><div class="line">        result.append(generatechild(i))</div><div class="line">        i+=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> result</div><div class="line"></div><div class="line">lst = generate(<span class="number">5</span>)</div><div class="line"><span class="keyword">print</span> lst</div></pre></td></tr></table></figure>
@@ -145,6 +147,14 @@ For example, given numRows = 5">
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/11/05/path-sum/" title="【LeetCode算法训练】 二叉树路径之和">
+  <strong>上一篇：</strong><br/>
+  <span>
+  【LeetCode算法训练】 二叉树路径之和</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2014/11/04/Valid-Palindrome/"  title="【LeetCode算法训练】 判断字符串是否是回文">
@@ -169,7 +179,7 @@ For example, given numRows = 5">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是杨辉三角形"><span class="toc-number">1.</span> <span class="toc-text">什么是杨辉三角形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">3.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是杨辉三角形"><span class="toc-number">1.</span> <span class="toc-text">什么是杨辉三角形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#难度★☆☆☆☆"><span class="toc-number">3.</span> <span class="toc-text">难度★☆☆☆☆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
  
   </div>
 
@@ -180,7 +190,7 @@ For example, given numRows = 5">
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -189,9 +199,9 @@ For example, given numRows = 5">
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/python/" title="python">python<sup>4</sup></a></li>
+			<li><a href="/tags/python/" title="python">python<sup>5</sup></a></li>
 		
-			<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>3</sup></a></li>
 		
 			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
